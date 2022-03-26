@@ -38,7 +38,7 @@ public class User implements UserDetails {
 	private String email;
 	private String phone;
 	private boolean enabled =true;
-    private String profile;
+    private String profile="active";
     
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
     @JsonIgnore

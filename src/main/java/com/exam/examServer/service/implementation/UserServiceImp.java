@@ -53,6 +53,9 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public User updateUser(User user, Set<UserRole> userRole) throws Exception {
+		BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+		String password=user.getPassword();
+		user.setPassword(passwordEncoder.encode(password));
 		for(UserRole ur:userRole)
 		{
 			roleRepository.save(ur.getRole());

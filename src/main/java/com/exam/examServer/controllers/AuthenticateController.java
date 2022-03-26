@@ -1,5 +1,7 @@
 package com.exam.examServer.controllers;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,6 +9,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.exam.examServer.config.JwtUtil;
 import com.exam.examServer.modals.JwtRequest;
 import com.exam.examServer.modals.JwtResponse;
+import com.exam.examServer.modals.User;
 import com.exam.examServer.service.implementation.UserDetailsServiceImp;
 
 @RestController
+@CrossOrigin("*")
 public class AuthenticateController {
 	
 	@Autowired
@@ -53,4 +59,9 @@ public class AuthenticateController {
 		}
 	}
 
+	@GetMapping("/current-user")
+	public User getCurrentUser(Principal principal)
+	{
+		return (User)userDetailsServiceImp.loadUserByUsername(principal.getName());
+	}
 }
