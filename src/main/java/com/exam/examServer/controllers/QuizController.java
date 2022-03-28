@@ -2,6 +2,7 @@ package com.exam.examServer.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.exam.examServer.service.QuizService;
 
 @RestController
 @RequestMapping("/quiz")
+@CrossOrigin("*")
 public class QuizController {
 	@Autowired
 	private QuizService quizService;
@@ -27,9 +29,9 @@ public class QuizController {
 	}
 	
 	@PutMapping("/updatequiz")
-	public Quiz updateQuiz(@RequestBody Quiz quiz)
+	public ResponseEntity<Quiz>  updateQuiz(@RequestBody Quiz quiz)
 	{
-		return quizService.updateQuiz(quiz);
+		return ResponseEntity.ok(quizService.updateQuiz(quiz));
 	}
 	
 	@GetMapping("getquiz/{id}")

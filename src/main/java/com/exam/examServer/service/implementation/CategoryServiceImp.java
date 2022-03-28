@@ -42,9 +42,7 @@ public class CategoryServiceImp implements CategoryService {
 
 	@Override
 	public void deleteCategory(Long categoryId) {
-		Category category=new Category();
-		category.setCid(categoryId);
-		this.categoryRepsoitory.delete(category);
+		this.categoryRepsoitory.deleteById(categoryId);
 		
 	}
 
