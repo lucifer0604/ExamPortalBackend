@@ -72,7 +72,7 @@ public class QuestionController {
 		return ResponseEntity.ok(list);
 	}
 	
-	@DeleteMapping("/deleteQuestion/{id}")
+	@DeleteMapping("/deletequestion/{id}")
 	public void deletequestion(@PathVariable("id") Long id)
 	{
 		 this.questionService.deleteQuestion(id);
